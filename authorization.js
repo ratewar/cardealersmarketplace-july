@@ -10,19 +10,11 @@ module.exports = (code) => {
 					'client_id=' + clientId + '&' +
 					'client_secret=' + clientSecret + '&' +
 					'code=' + code;
-	console.log(oauthURL);
 	const options = {
 		url : oauthURL,
 		json : true,
 	};
-	return request(options)
-		.then((response) => {
-			console.log(response.access_token);
-			console.log(response.scope);
-			//var dynamodb = new AWS.DynamoDB({region: 'us-east-1',apiVersion: '2012-08-10'});
-			/*var params = {
-				TableName: "MarketPlaceTokens"
-			};*/
+	return request(options).then((response) => {
 			var docClient = new AWS.DynamoDB.DocumentClient();
 			var table = "MarketPlaceTokens";
 			var marketPlaceType = "CarDealers";
